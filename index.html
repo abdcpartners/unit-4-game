@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>HangMan Assignment</title>
+    <title>Stone Crystal Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/master.css">
+    <!-- didn't get a chance to program css -->
 </head>
 
 
@@ -12,6 +15,7 @@
 
     <header>Game</header>
     <div class="game-description">Welcome to this game</div>
+    <h3> The crystals have been randomly assigned a hidden number. Click on the crystals until you've reached the random assigned total score target</h3>
     <div class="display-number"></div>
     <div class="results"></div>
     <!-- Use .value in jquery alternatively to id in calculator assignment -->
@@ -26,6 +30,22 @@
 
 
     <script>
+        //set random variables for stones and for target number
+        // var RandomNumber needs to be between 19 - 120
+        var RandomNumber = Math.floor(Math.random() * 101 + 19)
+            //set random numbers for the 4 stones
+        var stoneNumber1 = Math.floor(Math.random() * 11 + 1)
+        var stoneNumber2 = Math.floor(Math.random() * 11 + 1)
+        var stoneNumber3 = Math.floor(Math.random() * 11 + 1)
+        var stoneNumber4 = Math.floor(Math.random() * 11 + 1)
+
+
+        //Declare variables for tallies
+        var userTotal = 0;
+        var wins = 0;
+        var losses = 0;
+
+
         // Get the elements that need to change: total score, and result changes on click; stones change after game reset
         $(".display-number")
         $(".results")
@@ -33,21 +53,69 @@
 
 
         // Add event listener on the stones (click)
-        // Generate value of stones
+        // Add if statement for win, and for loss; delcare it once somewhere and use it in both areas
         // if statement for win, and for loss; delcare it once somewhere and use it in both areas
-        // Need a reset function; when number of added clicks is greater than assigned number
-        // result should change, as should score and total, and stones themselves
+
+        $('#stone1').on('click', function() {
+            userTotal = userTotal + stoneNumber1;
+            console.log("New userTotal= " + userTotal);
+            $('#results').text(userTotal);
+            //sets win/lose conditions
+            if (userTotal == Random) {
+                winner();
+            } else if (userTotal > Random) {
+                loser();
+            }
+        })
+        $('#stone2').on('click', function() {
+            userTotal = userTotal + stoneNumber2;
+            console.log("New userTotal= " + userTotal);
+            $('#results').text(userTotal);
+            if (userTotal == Random) {
+                winner();
+            } else if (userTotal > Random) {
+                loser();
+            }
+        })
+        $('#stone3').on('click', function() {
+            userTotal = userTotal + stoneNumber3;
+            console.log("New userTotal= " + userTotal);
+            $('#results').text(userTotal);
+            if (userTotal == Random) {
+                winner();
+            } else if (userTotal > Random) {
+                loser();
+            }
+        })
+        $('#stone4').on('click', function() {
+        userTotal = userTotal + stoneNumber4;
+        console.log("New userTotal= " + userTotal);
+        $('#results').text(userTotal);
+
+        if (userTotal == Random) {
+            winner();
+        } else if (userTotal > Random) {
+            loser();
+        }
+        });
+        });
 
 
+        // Reset function
+        function reset() {
+            RandomNumber = Math.floor(Math.random() * 101 + 19);
+            console.log(RandomNumber)
+            $('#randomNumber').text(RandomNumber);
+            stoneNumber1 = Math.floor(Math.random() * 11 + 1);
+            stoneNumber2 = Math.floor(Math.random() * 11 + 1);
+            stoneNumber3 = Math.floor(Math.random() * 11 + 1);
+            stoneNumber4 = Math.floor(Math.random() * 11 + 1);
+            userTotal = 0;
+            $('#results').text(userTotal);
+        }
 
 
-
-
-
-
-
-
-        //mix between calculator assignment and other assignment
+        // result should change, as should score and total, and stones themselves. Create wins and losses tally
     </script>
 
 </body>
